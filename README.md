@@ -3,7 +3,7 @@
     - java 8
     - spring-boot 2.1.0
     - mongodb 3.8
-    - redis 2.0.9
+    - redis 2.1.2
 - 功能点
     - 注册登录
         - 短信注册
