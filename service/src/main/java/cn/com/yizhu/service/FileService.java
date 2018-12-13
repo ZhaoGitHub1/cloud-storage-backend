@@ -1,5 +1,6 @@
 package cn.com.yizhu.service;
 
+import cn.com.yizhu.common.exception.BizException;
 import cn.com.yizhu.contants.FileTypeEnum;
 import cn.com.yizhu.dto.FileDTO;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,5 +16,5 @@ public interface FileService {
      * @return
      * @throws Exception
      */
-    FileDTO createFile(MultipartFile file, String path, String fileName, FileTypeEnum fileType) throws Exception;
+    FileDTO createFile(MultipartFile file, String path, String fileName, FileTypeEnum fileType) throws BizException;
 }

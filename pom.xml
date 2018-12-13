@@ -28,6 +28,7 @@
     <fastjson.version>1.2.21</fastjson.version>
     <swagger.version>2.9.2</swagger.version>
     <mongodb.version>3.8.1</mongodb.version>
+    <jedis.verion>2.9.0</jedis.verion>
   </properties>
 
   <build>
