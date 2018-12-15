@@ -3,7 +3,6 @@ package cn.com.yizhu.vo;
 import cn.com.yizhu.contants.FileTypeEnum;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotNull;
 
@@ -12,9 +11,6 @@ import javax.validation.constraints.NotNull;
  */
 @Api(description = "上传文件请求VO")
 public class CreateFileForm {
-
-    @ApiModelProperty(value = "文件")
-    private MultipartFile file;
 
     @ApiModelProperty(value = "文件路径", required = true)
     @NotNull(message = "文件路径不能为空！")
@@ -27,13 +23,8 @@ public class CreateFileForm {
     @NotNull(message = "文件类型不能为空！")
     private FileTypeEnum fileTypeEnum;
 
-    public MultipartFile getFile() {
-        return file;
-    }
-
-    public void setFile(MultipartFile file) {
-        this.file = file;
-    }
+    @ApiModelProperty(value = "文件备注")
+    private String tag;
 
     public String getPath() {
         return path;
@@ -57,5 +48,13 @@ public class CreateFileForm {
 
     public void setFileTypeEnum(FileTypeEnum fileTypeEnum) {
         this.fileTypeEnum = fileTypeEnum;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 }

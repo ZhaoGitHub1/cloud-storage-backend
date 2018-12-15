@@ -27,6 +27,16 @@ public class FileMeta {
     @Field
     private String md5;
 
+    public FileMeta(Long refId, Long version, Long size, String tag, String key, String suffix, String md5) {
+        this.refId = refId;
+        this.version = version;
+        this.size = size;
+        this.tag = tag;
+        this.key = key;
+        this.suffix = suffix;
+        this.md5 = md5;
+    }
+
     public Long getRefId() {
         return refId;
     }

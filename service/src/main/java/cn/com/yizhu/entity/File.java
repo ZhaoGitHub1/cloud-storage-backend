@@ -41,6 +41,16 @@ public class File {
     @Field
     private FileMeta fileMeta;
 
+    public File(String name, Integer type, String path, Integer status, Long createId, Date createTime, FileMeta fileMeta) {
+        this.name = name;
+        this.type = type;
+        this.path = path;
+        this.status = status;
+        this.createId = createId;
+        this.createTime = createTime;
+        this.fileMeta = fileMeta;
+    }
+
     public long getId() {
         return id;
     }
