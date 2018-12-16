@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.repository.Query;
 
 import java.util.List;
 
-public interface FileRepository extends MongoRepository<File, String> {
+public interface FileRepository extends MongoRepository<File, Long> {
 
     /**
      * 根据文件元信息查询
@@ -21,7 +21,7 @@ public interface FileRepository extends MongoRepository<File, String> {
      * @param md5
      * @return
      */
-    @Query(value = "{'fileMeta.md5':?0, 'fileMeta.refId':0, 'status':0}", fields = "{'fileMeta.key':1, 'fileMeta.md5':1}")
+    @Query(value = "{'fileMeta.md5':?0, 'refId':0, 'status':0}", fields = "{'fileMeta.key':1, 'fileMeta.md5':1}")
     List<File> queryFile(String md5);
 
     /**
@@ -31,7 +31,7 @@ public interface FileRepository extends MongoRepository<File, String> {
      * @param type
      * @return
      */
-    List<File> findAllByPathAndTypeAndStatus(String path, Integer status, Integer type);
+    List<File> findAllByPathAndTypeAndStatus(String path, Integer type, Integer status);
 
     /**
      * 查询文件列表
@@ -47,7 +47,9 @@ public interface FileRepository extends MongoRepository<File, String> {
      * @param type
      * @return
      */
-    List<File> findIdByPathAndTypeAndStatus(String path, Integer type, Integer status);
+    File queryFirstByPathAndTypeAndStatus(String path, Integer type, Integer status);
 
-    List<File> findIdByPathAndNameAndTypeAndStatus(String path, String name, Integer type, Integer status);
+    File queryFirstByPathAndNameAndTypeAndStatus(String path, String name, Integer type, Integer status);
+
+    List<File> findAllByPathStartsWithAndStatus(String path, Integer status);
 }

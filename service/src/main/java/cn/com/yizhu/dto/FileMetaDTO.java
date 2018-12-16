@@ -9,17 +9,11 @@ import io.swagger.annotations.ApiModelProperty;
 @Api(description = "文件元信息")
 public class FileMetaDTO {
 
-    @ApiModelProperty(value = "来源id")
-    private Long refId;
-
     @ApiModelProperty(value = "版本号")
     private Long version;
 
     @ApiModelProperty(value = "文件大小，单位byte")
     private Long size;
-
-    @ApiModelProperty(value = "标签/备注")
-    private String tag;
 
     @ApiModelProperty(value = "文件key")
     private String key;
@@ -29,14 +23,6 @@ public class FileMetaDTO {
 
     @ApiModelProperty(value = "文件的md5")
     private String md5;
-
-    public Long getRefId() {
-        return refId;
-    }
-
-    public void setRefId(Long refId) {
-        this.refId = refId;
-    }
 
     public Long getVersion() {
         return version;
@@ -52,14 +38,6 @@ public class FileMetaDTO {
 
     public void setSize(Long size) {
         this.size = size;
-    }
-
-    public String getTag() {
-        return tag;
-    }
-
-    public void setTag(String tag) {
-        this.tag = tag;
     }
 
     public String getKey() {

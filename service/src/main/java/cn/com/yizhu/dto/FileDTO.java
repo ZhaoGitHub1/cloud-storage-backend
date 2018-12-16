@@ -25,6 +25,12 @@ public class FileDTO {
     @ApiModelProperty(value = "状态")
     private Integer status;
 
+    @ApiModelProperty(value = "来源id")
+    private Long refId;
+
+    @ApiModelProperty(value = "标签/备注")
+    private String tag;
+
     @ApiModelProperty(value = "创建人id")
     private Long createId;
 
@@ -77,6 +83,22 @@ public class FileDTO {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Long getRefId() {
+        return refId;
+    }
+
+    public void setRefId(Long refId) {
+        this.refId = refId;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 
     public Long getCreateId() {

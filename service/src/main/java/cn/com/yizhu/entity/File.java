@@ -27,6 +27,12 @@ public class File {
     private Integer status;
 
     @Field
+    private Long refId;
+
+    @Field
+    private String tag;
+
+    @Field
     private Long createId;
 
     @Field
@@ -41,14 +47,17 @@ public class File {
     @Field
     private FileMeta fileMeta;
 
-    public File(String name, Integer type, String path, Integer status, Long createId, Date createTime, FileMeta fileMeta) {
+    public File(){}
+
+    public File(String name, Integer type, String path, Integer status, Long refId, String tag, Long createId, Date createTime) {
         this.name = name;
         this.type = type;
         this.path = path;
         this.status = status;
+        this.refId = refId;
+        this.tag = tag;
         this.createId = createId;
         this.createTime = createTime;
-        this.fileMeta = fileMeta;
     }
 
     public long getId() {
@@ -90,6 +99,22 @@ public class File {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Long getRefId() {
+        return refId;
+    }
+
+    public void setRefId(Long refId) {
+        this.refId = refId;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 
     public Long getCreateId() {

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.util.NoSuchElementException;
+
 
 /**
  * 全局异常拦截
@@ -36,6 +38,14 @@ public class WebExceptionHandler extends ResponseEntityExceptionHandler {
         LOG.error("业务处理异常：",e);
         return ResponseVO.fileResponseVO(e.getMessage());
     }
+
+    @ResponseBody
+    @ExceptionHandler(value = NoSuchElementException.class)
+    public ResponseVO noSuchEleExceptionHandler(Exception e){
+        LOG.error("查找的元素不存在异常：",e);
+        return ResponseVO.fileResponseVO("您选择的文件不存在！");
+    }
+
 
     @ResponseBody
     @ExceptionHandler(value = Exception.class)

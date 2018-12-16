@@ -10,10 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
@@ -29,17 +26,28 @@ public class FileController {
     @Autowired
     private FileService fileService;
 
-    @PostMapping("/createFile")
-    @ApiOperation(value = "上传文件或创建文件夹")
+    @PostMapping("/createFolder")
+    @ApiOperation(value = "创建文件夹")
     @Valid
-    public ResponseVO<FileDTO> createFile(@ApiParam(value = "文件", name = "file") MultipartFile file,
+    public ResponseVO<FileDTO> createFolder(@ModelAttribute CreateFileForm createFileForm) throws Exception {
+        return ResponseVO.successResponseVO(
+                fileService.createFolder(
+                        createFileForm.getParentId(),
+                        createFileForm.getName(),
+                        createFileForm.getTag()
+                )
+        );
+    }
+    @PostMapping("/createFile")
+    @ApiOperation(value = "上传文件")
+    @Valid
+    public ResponseVO<FileDTO> createFile(@ApiParam(value = "文件", name = "file", required = true) MultipartFile file,
                                           @ModelAttribute CreateFileForm createFileForm) throws Exception {
         return ResponseVO.successResponseVO(
                 fileService.createFile(
                         file,
-                        createFileForm.getPath(),
-                        createFileForm.getFileName(),
-                        createFileForm.getFileTypeEnum(),
+                        createFileForm.getParentId(),
+                        createFileForm.getName(),
                         createFileForm.getTag()
                 )
         );
@@ -58,5 +66,49 @@ public class FileController {
         );
     }
 
+    @ApiOperation(value = "移动或复制时获取除自身和子文件夹外的文件列表")
+    @GetMapping("/getCanCopyToFileList")
+    @Valid
+    public ResponseVO<List<FileDTO>> getCanCopyToFileList(@RequestParam(name = "id") Long id,
+                                                       @RequestParam(name = "path") String path){
+        return ResponseVO.successResponseVO(
+                fileService.getCanCopyToFileList(id, path)
+        );
+    }
 
+    @ApiOperation("复制文件")
+    @GetMapping("/copyFile")
+    public ResponseVO<List<FileDTO>> copyFile(@RequestParam(name = "sourceIds") List<Long> sourceIds,
+                                        @RequestParam(name = "targetId") Long targetId) throws Exception {
+        return ResponseVO.successResponseVO(
+                fileService.copyFile(sourceIds, targetId)
+        );
+    }
+
+    @ApiOperation("移动文件")
+    @GetMapping("/moveFile")
+    public ResponseVO<List<FileDTO>> moveFile(@RequestParam(name = "sourceIds") List<Long> sourceIds,
+                                              @RequestParam(name = "targetId") Long targetId) throws Exception {
+        return ResponseVO.successResponseVO(
+                fileService.moveFile(sourceIds, targetId)
+        );
+    }
+
+    @ApiOperation("删除文件")
+    @GetMapping("/deleteFile")
+    public ResponseVO<List<FileDTO>> deleteFile(@RequestParam(name = "sourceIds") List<Long> sourceIds,
+                                              @RequestParam(name = "targetId") Long targetId) throws Exception {
+        return ResponseVO.successResponseVO(
+                fileService.deleteFile(sourceIds, targetId)
+        );
+    }
+
+    @ApiOperation("彻底删除文件")
+    @GetMapping("/cleanFile")
+    public ResponseVO<List<FileDTO>> cleanFile(@RequestParam(name = "sourceIds") List<Long> sourceIds,
+                                              @RequestParam(name = "targetId") Long targetId) throws Exception {
+        return ResponseVO.successResponseVO(
+                fileService.cleanFile(sourceIds, targetId)
+        );
+    }
 }

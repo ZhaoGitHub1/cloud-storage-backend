@@ -7,16 +7,10 @@ import org.springframework.data.mongodb.core.mapping.Field;
 public class FileMeta {
 
     @Field
-    private Long refId;
-
-    @Field
     private Long version;
 
     @Field
     private Long size;
-
-    @Field
-    private String tag;
 
     @Field
     private String key;
@@ -27,22 +21,14 @@ public class FileMeta {
     @Field
     private String md5;
 
-    public FileMeta(Long refId, Long version, Long size, String tag, String key, String suffix, String md5) {
-        this.refId = refId;
+    public FileMeta(){}
+
+    public FileMeta(Long version, Long size, String key, String suffix, String md5) {
         this.version = version;
         this.size = size;
-        this.tag = tag;
         this.key = key;
         this.suffix = suffix;
         this.md5 = md5;
-    }
-
-    public Long getRefId() {
-        return refId;
-    }
-
-    public void setRefId(Long refId) {
-        this.refId = refId;
     }
 
     public Long getVersion() {
@@ -59,14 +45,6 @@ public class FileMeta {
 
     public void setSize(Long size) {
         this.size = size;
-    }
-
-    public String getTag() {
-        return tag;
-    }
-
-    public void setTag(String tag) {
-        this.tag = tag;
     }
 
     public String getKey() {
