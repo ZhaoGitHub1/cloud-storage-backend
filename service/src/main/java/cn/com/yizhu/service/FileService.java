@@ -68,19 +68,64 @@ public interface FileService {
 
     /**
      * 删除文件
-     * @param sourceIds
-     * @param targetId
+     * @param targetIds
      * @throws BizException
      * @return
      */
-    List<FileDTO> deleteFile(List<Long> sourceIds, Long targetId) throws BizException;
+    List<FileDTO> deleteFile(List<Long> targetIds) throws BizException;
 
     /**
      * 彻底删除文件
-     * @param sourceIds
+     * @param targetIds
+     * @return
+     * @throws BizException
+     */
+    List<FileDTO> cleanFile(List<Long> targetIds) throws BizException;
+
+    /**
+     * 重命名文件
      * @param targetId
      * @return
      * @throws BizException
      */
-    List<FileDTO> cleanFile(List<Long> sourceIds, Long targetId) throws BizException;
+    FileDTO renameFile(Long targetId) throws BizException;
+
+    /**
+     * 清空回收站
+     * @return
+     */
+    Boolean cleanAll();
+
+    /**
+     * 下载
+     * @param targetId
+     */
+    void download(Long targetId);
+
+    /**
+     * 批量打包下载
+     * @param targetIds
+     */
+    void batchDownload(List<Long> targetIds);
+
+    /**
+     * 图片预览
+     * @param key
+     * @param suffix
+     */
+    void downPicuture(String key, String suffix);
+
+    /**
+     * 分类查看文件
+     * @param category
+     * @return
+     */
+    List<FileDTO> findByCategory(Integer category);
+
+    /**
+     * 文件名模糊查询文件
+     * @param fileName
+     * @return
+     */
+    List<FileDTO> findFilesLikeName(String fileName);
 }

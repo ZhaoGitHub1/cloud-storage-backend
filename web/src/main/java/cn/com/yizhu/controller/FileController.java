@@ -95,20 +95,71 @@ public class FileController {
     }
 
     @ApiOperation("删除文件")
-    @GetMapping("/deleteFile")
-    public ResponseVO<List<FileDTO>> deleteFile(@RequestParam(name = "sourceIds") List<Long> sourceIds,
-                                              @RequestParam(name = "targetId") Long targetId) throws Exception {
+    @DeleteMapping("/deleteFile")
+    public ResponseVO<List<FileDTO>> deleteFile(@RequestParam(name = "targetIds") List<Long> targetIds) throws Exception {
         return ResponseVO.successResponseVO(
-                fileService.deleteFile(sourceIds, targetId)
+                fileService.deleteFile(targetIds)
         );
     }
 
     @ApiOperation("彻底删除文件")
-    @GetMapping("/cleanFile")
-    public ResponseVO<List<FileDTO>> cleanFile(@RequestParam(name = "sourceIds") List<Long> sourceIds,
-                                              @RequestParam(name = "targetId") Long targetId) throws Exception {
+    @DeleteMapping("/cleanFile")
+    public ResponseVO<List<FileDTO>> cleanFile(@RequestParam(name = "targetIds") List<Long> targetIds) throws Exception {
         return ResponseVO.successResponseVO(
-                fileService.cleanFile(sourceIds, targetId)
+                fileService.cleanFile(targetIds)
+        );
+    }
+
+    @ApiOperation("重命名文件")
+    @GetMapping("/renameFile/{targetId}")
+    public ResponseVO<FileDTO> renameFile(@PathVariable(name = "targetId") Long targetId) throws Exception {
+        return ResponseVO.successResponseVO(
+                fileService.renameFile(targetId)
+        );
+    }
+
+    @ApiOperation("清空回收站")
+    @DeleteMapping("/cleanAll")
+    public ResponseVO<Boolean> cleanAll() throws Exception {
+        return ResponseVO.successResponseVO(
+                fileService.cleanAll()
+        );
+    }
+
+    @ApiOperation("下载")
+    @GetMapping("/download/{targetId}")
+    public void download(@PathVariable(name = "targetId") Long targetId) throws Exception {
+        fileService.download(targetId);
+    }
+
+    @ApiOperation("批量打包下载")
+    @GetMapping("/batchDownload")
+    public void batchDownload(@RequestParam(name = "targetIds") List<Long> targetIds) throws Exception {
+        fileService.batchDownload(targetIds);
+    }
+
+    @ApiOperation("图片文件预览")
+    @GetMapping("/downPicuture/{key}.{suffix}")
+    public void downPicuture(@PathVariable(name = "key") String key, @PathVariable(name = "suffix") String suffix) throws Exception {
+        fileService.downPicuture(key, suffix);
+    }
+
+    @ApiOperation("分类查看文件")
+    @GetMapping("/findByCategory/{category}")
+    public ResponseVO<List<FileDTO>> findByCategory(@PathVariable(name = "category") Integer category) throws Exception {
+        return ResponseVO.successResponseVO(
+                fileService.findByCategory(category)
+        );
+    }
+
+    /**
+     * root和/不可查询。。。
+     */
+    @ApiOperation("文件名模糊查询文件")
+    @GetMapping("/findFilesLikeName/{fileName}")
+    public ResponseVO<List<FileDTO>> findFilesLikeName(@PathVariable(name = "fileName") String fileName) throws Exception {
+        return ResponseVO.successResponseVO(
+                fileService.findFilesLikeName(fileName)
         );
     }
 }

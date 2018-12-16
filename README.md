@@ -1,4 +1,4 @@
-# cloud-storage-backend repositoryy
+# cloud-storage-backend repository
 - 技术选型
     - java 8
     - spring-boot 2.1.0

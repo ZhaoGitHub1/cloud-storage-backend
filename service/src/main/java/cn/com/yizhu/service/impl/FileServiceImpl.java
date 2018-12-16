@@ -235,12 +235,47 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public List<FileDTO> deleteFile(List<Long> sourceIds, Long targetId) throws BizException {
+    public List<FileDTO> deleteFile(List<Long> targetIds) throws BizException {
         return null;
     }
 
     @Override
-    public List<FileDTO> cleanFile(List<Long> sourceIds, Long targetId) throws BizException {
+    public List<FileDTO> cleanFile(List<Long> targetIds) throws BizException {
+        return null;
+    }
+
+    @Override
+    public FileDTO renameFile(Long targetId) throws BizException {
+        return null;
+    }
+
+    @Override
+    public Boolean cleanAll() {
+        return null;
+    }
+
+    @Override
+    public void download(Long targetId) {
+
+    }
+
+    @Override
+    public void batchDownload(List<Long> targetIds) {
+
+    }
+
+    @Override
+    public void downPicuture(String key, String suffix) {
+
+    }
+
+    @Override
+    public List<FileDTO> findByCategory(Integer category) {
+        return null;
+    }
+
+    @Override
+    public List<FileDTO> findFilesLikeName(String fileName) {
         return null;
     }
 
